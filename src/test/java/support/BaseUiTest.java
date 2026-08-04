@@ -2,6 +2,7 @@ package support;
 
 import config.WebDriverFactory;
 import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
@@ -41,6 +42,7 @@ public abstract class BaseUiTest {
     };
 
     @Before
+    @Step("Запустить браузер")
     public void createDriver() {
         driver = WebDriverFactory.create();
     }

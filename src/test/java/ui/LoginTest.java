@@ -4,6 +4,7 @@ import client.UserApiClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import model.TestUser;
 import org.junit.After;
@@ -47,12 +48,14 @@ public class LoginTest extends BaseUiTest {
     }
 
     @Before
+    @Step("Создать тестового пользователя")
     public void createUser() {
         user = TestUser.random();
         accessToken = userApiClient.register(user);
     }
 
     @After
+    @Step("Удалить тестового пользователя")
     public void deleteUser() {
         userApiClient.delete(accessToken);
     }
@@ -68,6 +71,7 @@ public class LoginTest extends BaseUiTest {
         assertTrue(new MainPage(driver).isOrderButtonVisible());
     }
 
+    @Step("Открыть форму входа через: {point}")
     private void openLoginForm(LoginEntryPoint point) {
         switch (point) {
             case MAIN_LOGIN_BUTTON:

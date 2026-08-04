@@ -95,6 +95,7 @@
                 <version>2.15.0</version>
                 <configuration>
                     <reportVersion>${allure.report.version}</reportVersion>
+                    <reportDirectory>${project.basedir}/allure-report</reportDirectory>
                 </configuration>
             </plugin>
         </plugins>

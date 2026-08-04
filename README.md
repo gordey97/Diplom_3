@@ -37,7 +37,9 @@ mvn clean test -Dbrowser=yandex \
 Allure:
 
 ```bash
+mvn allure:report
 mvn allure:serve
 ```
 
-Результаты тестов сохраняются в `target/allure-results`.
+Результаты тестов сохраняются в `target/allure-results`, а статический отчёт —
+в `allure-report`. Главная страница отчёта: `allure-report/index.html`.

@@ -53,6 +53,7 @@ public class RegistrationPage extends BasePage {
         return isVisible(invalidPasswordError);
     }
 
+    @Step("Дождаться перехода на страницу входа")
     public void waitForLoginPage() {
         waitForUrl("/login");
     }

@@ -3,6 +3,8 @@ package client;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import config.TestConfig;
+import io.qameta.allure.Step;
+import model.Credentials;
 import model.TestUser;
 
 import java.io.IOException;
@@ -16,23 +18,28 @@ public class UserApiClient {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final Gson gson = new Gson();
 
+    @Step("Зарегистрировать тестового пользователя через API: {user.email}")
     public String register(TestUser user) {
-        JsonObject body = new JsonObject();
-        body.addProperty("email", user.getEmail());
-        body.addProperty("password", user.getPassword());
-        body.addProperty("name", user.getName());
-        JsonObject response = send("/api/auth/register", "POST", body.toString(), null, 200);
+        String serializedUser = gson.toJson(user);
+        JsonObject response = send("/api/auth/register", "POST", serializedUser, null, 200);
         return response.get("accessToken").getAsString();
     }
 
+    @Step("Выполнить вход тестового пользователя через API: {user.email}")
     public String login(TestUser user) {
-        JsonObject body = new JsonObject();
-        body.addProperty("email", user.getEmail());
-        body.addProperty("password", user.getPassword());
-        JsonObject response = send("/api/auth/login", "POST", body.toString(), null, 200);
+        Credentials credentials = new Credentials(user.getEmail(), user.getPassword());
+        String serializedCredentials = gson.toJson(credentials);
+        JsonObject response = send(
+                "/api/auth/login",
+                "POST",
+                serializedCredentials,
+                null,
+                200
+        );
         return response.get("accessToken").getAsString();
     }
 
+    @Step("Удалить тестового пользователя через API")
     public void delete(String accessToken) {
         if (accessToken == null || accessToken.isBlank()) {
             return;

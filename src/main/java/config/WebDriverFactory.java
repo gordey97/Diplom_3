@@ -13,6 +13,9 @@ public final class WebDriverFactory {
         String browser = System.getProperty("browser", "chrome").toLowerCase();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1440,900");
+        if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
+        }
 
         if ("yandex".equals(browser)) {
             String binary = System.getProperty("yandex.binary");

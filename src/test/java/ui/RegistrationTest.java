@@ -4,6 +4,7 @@ import client.UserApiClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import model.TestUser;
 import org.junit.After;
@@ -22,6 +23,7 @@ public class RegistrationTest extends BaseUiTest {
     private String accessToken;
 
     @After
+    @Step("Удалить созданного пользователя")
     public void deleteCreatedUser() {
         if (createdUser != null && accessToken == null) {
             try {
