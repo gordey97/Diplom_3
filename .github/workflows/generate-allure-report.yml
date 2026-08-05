@@ -24,7 +24,7 @@ jobs:
       - name: Run UI tests in Chrome
         run: mvn -B clean test -Dbrowser=chrome -Dheadless=true
       - name: Build Allure report
-        run: mvn -B allure:report
+        run: mvn -B io.qameta.allure:allure-maven:2.15.0:report
       - name: Commit Allure report
         run: |
           git config user.name "github-actions[bot]"
